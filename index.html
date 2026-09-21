@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexTech Gaming - Noticias de Videojuegos y Tecnología</title>
+    
+    <style>
+        :root {
+            --bg-dark: #0b0f19;
+            --bg-card: #151b2b;
+            --bg-card-hover: #1e263c;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --ad-bg: #1e293b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgba(11, 15, 25, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 20px rgba(0, 243, 255, 0.5);
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px rgba(188, 19, 254, 0.7);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px rgba(0, 243, 255, 0.5);
+        }
+
+        .ad-placeholder {
+            background-color: var(--ad-bg);
+            border: 1px dashed var(--text-muted);
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin: 30px auto;
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+
+        .ad-placeholder::before {
+            content: "ADVERTISEMENT";
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            font-size: 0.6rem;
+            color: #64748b;
+        }
+
+        .ad-banner {
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+        }
+
+        .ad-sidebar {
+            width: 100%;
+            height: 250px;
+            margin: 20px 0;
+        }
+        
+        .ad-infeed {
+            width: 100%;
+            height: 120px;
+            margin: 30px 0;
+        }
+
+        .hero {
+            margin-top: 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            height: 420px;
+            background: linear-gradient(to top, rgba(11, 15, 25, 1) 0%, rgba(11, 15, 25, 0.3) 100%), url('https://placehold.co/1200x600/151b2b/00f3ff?text=PlayStation+6:+Hardware+Next-Gen') center/cover;
+            display: flex;
+            align-items: flex-end;
+            padding: 40px;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .hero:hover {
+            border-color: rgba(0, 243, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(0, 243, 255, 0.15);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .tag {
+            background-color: var(--neon-purple);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(188, 19, 254, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 2.3rem;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        @media (min-width: 992px) {
+            .main-layout {
+                grid-template-columns: 2.5fr 1fr;
+            }
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--neon-cyan);
+            padding-bottom: 10px;
+            display: inline-block;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+        }
+
+        .article-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        @media (min-width: 600px) {
+            .article-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background-color: var(--bg-card-hover);
+            border-color: rgba(0, 243, 255, 0.3);
+            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.15), 0 0 15px rgba(188, 19, 254, 0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.4s ease;
+        }
+
+        .card:hover img {
+            border-bottom: 2px solid var(--neon-cyan);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        aside .widget {
+            background-color: var(--bg-card);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .trending-list {
+            list-style: none;
+            counter-reset: trending-counter;
+        }
+
+        .trending-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 20px;
+            counter-increment: trending-counter;
+        }
+
+        .trending-list li::before {
+            content: "0" counter(trending-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-muted);
+            opacity: 0.3;
+        }
+
+        .trending-list h4 {
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .trending-list li:hover h4 {
+            color: var(--neon-cyan);
+        }
+
+        footer {
+            background-color: rgba(15, 23, 42, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-main);
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .content-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .legal-content {
+            background-color: var(--bg-card);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .legal-content h1 {
+            color: var(--neon-cyan);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .legal-content h2 {
+            color: var(--text-main);
+            margin: 25px 0 15px;
+            font-size: 1.3rem;
+        }
+
+        .legal-content p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 600px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--bg-dark);
+            border: 1px solid #334155;
+            color: var(--text-main);
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 8px rgba(0, 243, 255, 0.2);
+        }
+
+        .article-full {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            margin-bottom: 40px;
+        }
+
+        .article-full-header h1 {
+            font-size: 2.4rem;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            line-height: 1.25;
+        }
+        
+        .article-full-meta {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .article-full-image {
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
+        .article-body p {
+            font-size: 1.1rem;
+            margin-bottom: 22px;
+            color: #cbd5e1;
+            line-height: 1.85;
+        }
+        
+        .article-body h2 {
+            color: var(--neon-cyan);
+            margin: 40px 0 15px;
+            font-size: 1.5rem;
+            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+            padding-bottom: 8px;
+        }
+
+        .article-body strong {
+            color: var(--text-main);
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--neon-cyan);
+            border: 1px solid var(--neon-cyan);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            nav ul { display: none; }
+            .hero h1 { font-size: 1.7rem; }
+            .article-full-header h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <div class="logo" onclick="showSection('home')">Nex<span>Tech</span></div>
+            <div class="menu-toggle">☰</div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showSection('home'); return false;">Inicio</a></li>
+                    <li><a href="#" onclick="showSection('home'); return false;">Noticias</a></li>
+                    <li><a href="#" onclick="showSection('privacy'); return false;">Privacidad</a></li>
+                    <li><a href="#" onclick="showSection('contact'); return false;">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="ad-placeholder ad-banner">
+            [Bloque AdSense - Banner Cabecera 728x90]
+        </div>
+
+        <div id="home" class="content-section active">
+            <!-- Noticia Destacada Principal (Hero) -->
+            <section class="hero fade-in" onclick="showSection('article-ps6')">
+                <div class="hero-content">
+                    <span class="tag">Exclusiva</span>
+                    <h1>PlayStation 6: Especificaciones filtradas sugieren un salto generacional masivo con IA integrada</h1>
+                    <p class="card-meta">Hace 2 horas • Por Álex Gamer (Haz clic para leer el artículo completo)</p>
+                </div>
+            </section>
+
+            <div class="main-layout">
+                <main>
+                    <h2 class="section-title">Últimas Noticias</h2>
+                    
+                    <div class="article-grid">
+                        <!-- Artículo 1: Nvidia -->
+                        <article class="card fade-in" onclick="showSection('article-nvidia')">
+                            <img src="https://placehold.co/600x400/1e293b/00f3ff?text=Nvidia+RTX+5090" alt="Tarjeta Gráfica RTX 5090">
+                            <div class="card-content">
+                                <span class="tag" style="background-color: var(--neon-cyan); color: #000;">Hardware</span>
+                                <h3 class="card-title">Nvidia RTX 5090 destroza los benchmarks actuales en 8K</h3>
+                                <p class="card-meta">Hace 4 horas</p>
+                            </div>
+                        </article>
+
+                        <!-- Artículo 2: GTA VI -->
+                        <article class="card fade-in" onclick="showSection('article-gta')">
+                            <img src="https://placehold.co/600x400/1e293b/bc13fe?text=GTA+VI+Vice+City" alt="GTA VI Trailer Análisis">
+                            <div class="card-content">
+                                <span class="tag">Juegos</span>
+                                <h3 class="card-title">Analizamos el segundo tráiler de GTA VI cuadro por cuadro: Detalles ocultos</h3>
+                                <p class="card-meta">Hace 6 horas</p>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="ad-placeholder ad-infeed fade-in">
+                        [Bloque AdSense - Anuncio In-Feed Nativo]
+                    </div>
+
+                    <div class="article-grid">
+                        <!-- Artículo 3: Switch 2 -->
+                        <article class="card fade-in" onclick="showSection('article-switch')">
+                            <img src="https://placehold.co/600x400/1e293b/00f3ff?text=Nintendo+Switch+2" alt="Nintendo Switch 2 Consola">
+                            <div class="card-content">
+                                <span class="tag" style="background-color: #ff003c;">Consolas</span>
+                                <h3 class="card-title">Nintendo confirma la fecha de presentación de la sucesora de Switch</h3>
+                                <p class="card-meta">Hace 12 horas</p>
+                            </div>
+                        </article>
+
+                        <!-- Artículo 4: AMD Ryzen -->
+                        <article class="card fade-in" onclick="showSection('article-amd')">
+                            <img src="https://placehold.co/600x400/1e293b/bc13fe?text=AMD+Ryzen+9000" alt="Procesadores AMD Ryzen">
+                            <div class="card-content">
+                                <span class="tag" style="background-color: var(--neon-cyan); color: #000;">Hardware</span>
+                                <h3 class="card-title">Filtrados los precios de la nueva generación de procesadores AMD Ryzen</h3>
+                                <p class="card-meta">Hace 1 día</p>
+                            </div>
+                        </article>
+
+                         <!-- Artículo 5: Cyberpunk -->
+                         <article class="card fade-in" onclick="showSection('article-cyberpunk')">
+                            <img src="https://placehold.co/600x400/1e293b/00f3ff?text=Cyberpunk+Orion" alt="Secuela Cyberpunk Orion">
+                            <div class="card-content">
+                                <span class="tag">Juegos</span>
+                                <h3 class="card-title">CD Projekt Red inicia la fase de desarrollo principal de la secuela de Cyberpunk</h3>
+                                <p class="card-meta">Hace 1 día</p>
+                            </div>
+                        </article>
+                        
+                        <!-- Artículo 6: Steam Deck -->
+                        <article class="card fade-in" onclick="showSection('article-steamdeck')">
+                            <img src="https://placehold.co/600x400/1e293b/bc13fe?text=Steam+Deck+Valve" alt="Steam Deck refrigeración">
+                            <div class="card-content">
+                                <span class="tag" style="background-color: #ff003c;">Consolas</span>
+                                <h3 class="card-title">Valve patenta un nuevo sistema de refrigeración para futuras consolas portátiles</h3>
+                                <p class="card-meta">Hace 2 días</p>
+                            </div>
+                        </article>
+                    </div>
+                </main>
+
+                <aside>
+                    <div class="widget fade-in">
+                        <h3 class="section-title" style="font-size: 1.2rem; border-color: var(--neon-purple); text-shadow: 0 0 5px rgba(188, 19, 254, 0.3);">Tendencias</h3>
+                        <ul class="trending-list">
+                            <li><h4 onclick="showSection('article-switch')">PlayStation Plus: Juegos gratis confirmados para el próximo mes</h4></li>
+                            <li><h4 onclick="showSection('article-nvidia')">Guía de optimización: Cómo exprimir al máximo tu gráfica en juegos AAA</h4></li>
+                            <li><h4 onclick="showSection('article-amd')">Xbox Game Pass sube de precio en varios territorios europeos</h4></li>
+                            <li><h4 onclick="showSection('article-steamdeck')">Reseña de auriculares: ¿Valen la pena los nuevos modelos inalámbricos?</h4></li>
+                        </ul>
+                    </div>
+
+                    <div class="ad-placeholder ad-sidebar fade-in" style="position: sticky; top: 100px;">
+                        [Bloque AdSense - Anuncio Cuadrado Sidebar 300x250]
+                    </div>
+                </aside>
+            </div>
+        </div>
+
+        <!-- VISTA DE ARTÍCULO: PS6 (HERO) -->
+        <div id="article-ps6" class="content-section">
+            <button class="back-button" onclick="showSection('home')">← Volver al Inicio</button>
+            <div class="article-full fade-in">
+                <div class="article-full-header">
+                    <span class="tag">Exclusiva</span>
+                    <h1>PlayStation 6: Especificaciones filtradas sugieren un salto generacional masivo con IA integrada</h1>
+                    <div class="article-full-meta"><span>Por Álex Gamer</span><span>•</span><span>Hace 2 horas</span><span>•</span><span>Lectura de 4 min</span></div>
+                </div>
+                <img class="article-full-image" src="https://placehold.co/1200x500/1e293b/00f3ff?text=PlayStation+6:+Hardware+Next-Gen+Arquitectura" alt="PS6 Detalle Tecnológico">
+                <div class="article-body">
+                    <p>Nuevos reportes procedentes de cadenas de suministro asiáticas sugieren que Sony ya se encuentra trabajando estrechamente con socios tecnológicos en el diseño preliminar de su próxima consola de sobremesa, marcando lo que promete ser uno de los saltos tecnológicos más ambiciosos en la historia de la industria.</p>
+                    
+                    <p>Aunque el ciclo de vida de la actual generación de consolas todavía tiene recorrido por delante, los ingenieros de hardware ya perfilan las bases de lo que será el estándar de entretenimiento interactivo para la próxima década.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Inteligencia artificial y escalado neuronal en tiempo real</h2>
+                    <p>El foco principal de la arquitectura de la supuesta PlayStation 6 no residiría únicamente en la fuerza bruta de procesamiento tradicional, sino en la integración masiva de aceleradores neuronales dedicados exclusivamente a tareas de inteligencia artificial en tiempo real.</p>
+                    <p>Esto permitiría alcanzar resoluciones hiperdetalladas con una tasa de cuadros por segundo completamente estable, eliminando los tradicionales compromisos visuales entre rendimiento y calidad gráfica que afectan a los títulos actuales.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Un ecosistema totalmente enfocado al juego digital y la nube</h2>
+                    <p>Fuentes cercanas al proyecto también señalan que el almacenamiento en estado sólido experimentará una evolución exponencial, reduciendo los tiempos de carga a cero absoluto y permitiendo universos abiertos con densidades de físicas y partículas nunca antes vistas en una plataforma doméstica.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE ARTÍCULO: NVIDIA -->
+        <div id="article-nvidia" class="content-section">
+            <button class="back-button" onclick="showSection('home')">← Volver al Inicio</button>
+            <div class="article-full fade-in">
+                <div class="article-full-header">
+                    <span class="tag" style="background-color: var(--neon-cyan); color: #000;">Hardware</span>
+                    <h1>Nvidia RTX 5090 destroza los benchmarks actuales en 8K</h1>
+                    <div class="article-full-meta"><span>Por Álex Gamer</span><span>•</span><span>Hace 4 horas</span><span>•</span><span>Lectura de 3 min</span></div>
+                </div>
+                <img class="article-full-image" src="https://placehold.co/1200x500/1e293b/00f3ff?text=Nvidia+GeForce+RTX+5090+Blackwell" alt="Nvidia RTX 5090 Análisis">
+                <div class="article-body">
+                    <p>La espera ha terminado para los entusiastas del PC gaming más exigentes. La nueva <strong>Nvidia GeForce RTX 5090</strong>, impulsada por la esperada arquitectura Blackwell, ha llegado al mercado estableciendo un antes y un después indiscutible en términos de potencia bruta y eficiencia energética.</p>
+                    
+                    <p>En las primeras pruebas de rendimiento independientes, la tarjeta ha demostrado una superioridad aplastante frente a la generación anterior, superando los límites conocidos del renderizado en ultra alta definición.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Rendimiento en 8K real sin concesiones</h2>
+                    <p>Las pruebas confirman que los núcleos Tensor de nueva generación y la optimización de los algoritmos de trazado de rayos permiten ejecutar los títulos más pesados del mercado a resolución 8K nativa o reescalada de manera impecable.</p>
+                    <p>Asimismo, los creadores de contenido y profesionales del diseño 3D encontrarán en esta GPU una herramienta revolucionaria para la renderización de escenas complejas en tiempo real.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Refrigeración avanzada y consumo optimizado</h2>
+                    <p>A pesar de su titánica potencia, los ingenieros de Nvidia han logrado rediseñar por completo el sistema de disipación térmica, manteniendo temperaturas estables y niveles de ruido sorprendentemente bajos incluso bajo cargas de trabajo prolongadas.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE ARTÍCULO: GTA VI -->
+        <div id="article-gta" class="content-section">
+            <button class="back-button" onclick="showSection('home')">← Volver al Inicio</button>
+            <div class="article-full fade-in">
+                <div class="article-full-header">
+                    <span class="tag">Juegos</span>
+                    <h1>Analizamos el segundo tráiler de GTA VI cuadro por cuadro: Detalles ocultos</h1>
+                    <div class="article-full-meta"><span>Por Laura Croft</span><span>•</span><span>Hace 6 horas</span><span>•</span><span>Lectura de 5 min</span></div>
+                </div>
+                <img class="article-full-image" src="https://placehold.co/1200x500/1e293b/bc13fe?text=GTA+VI+Vice+City+Gameplay+Details" alt="GTA VI Análisis Detallado">
+                <div class="article-body">
+                    <p>Rockstar Games ha vuelto a sacudir internet con la publicación de un nuevo avance oficial de <strong>Grand Theft Auto VI</strong>, ofreciendo un vistazo mucho más profundo al estado de Leonida, sus bulliciosas calles urbanas y los pantanos rurales circundantes.</p>
+                    
+                    <p>La comunidad de jugadores no ha tardado en volcarse en internet para diseccionar cada segundo del metraje, descubriendo una cantidad asombrosa de microdetalles que confirman que este será el mundo abierto más realista jamás construido.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Físicas de simulación social e iluminación volumétrica</h2>
+                    <p>Uno de los aspectos más llamativos es el comportamiento de los NPC (personajes no controlables). El tráiler muestra multitudes con rutinas independientes y reacciones dinámicas hiperrealistas ante los estímulos del entorno y el clima.</p>
+                    <p>La iluminación global mediante trazado de rayos simula con precisión milimétrica cómo reacciona la luz solar tropical sobre la chapa de los vehículos, la piel y el agua de los canales de Vice City.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Un mapa descomunal lleno de vida</h2>
+                    <p>Todo apunta a que la exploración vertical y horizontal superará con creces las expectativas, consolidando el regreso a Vice City como el evento multimedia más importante de la década actual en la industria del videojuego.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE ARTÍCULO: SWITCH 2 -->
+        <div id="article-switch" class="content-section">
+            <button class="back-button" onclick="showSection('home')">← Volver al Inicio</button>
+            <div class="article-full fade-in">
+                <div class="article-full-header">
+                    <span class="tag" style="background-color: #ff003c;">Consolas</span>
+                    <h1>Nintendo confirma la fecha de presentación de la sucesora de Switch</h1>
+                    <div class="article-full-meta"><span>Por Mario B.</span><span>•</span><span>Hace 12 horas</span><span>•</span><span>Lectura de 3 min</span></div>
+                </div>
+                <img class="article-full-image" src="https://placehold.co/1200x500/1e293b/00f3ff?text=Nintendo+Switch+2+Anuncio+Oficial" alt="Nintendo Switch 2 Revelación">
+                <div class="article-body">
+                    <p>Tras años de intensos rumores, filtraciones y especulaciones por parte de la industria, Nintendo ha emitido un comunicado oficial anunciando el calendario definitivo para la revelación mundial de su próxima videoconsola sucesora de la exitosa Nintendo Switch.</p>
+                    
+                    <p>La compañía japonesa ha enfatizado que el dispositivo mantendrá el concepto híbrido que tantas alegrías les ha dado, pero incorporando mejoras de hardware sustanciales solicitadas por la comunidad.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Retrocompatibilidad y potencia portátil</h2>
+                    <p>Uno de los puntos clave que más tranquilidad ha aportado a los inversores y seguidores es la confirmación de la total retrocompatibilidad con el catálogo actual de cartuchos y juegos digitales de Nintendo Switch.</p>
+                    <p>Además, la pantalla incorporará tecnología de vanguardia para ofrecer una experiencia visual nítida tanto en modo portátil como conectada al televisor mediante el dock rediseñado.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Expectativas muy altas en el mercado</h2>
+                    <p>Con este anuncio, Nintendo se prepara para dominar la campaña de lanzamientos, generando una enorme expectación sobre cuáles serán las franquicias insignia que acompañarán a la consola en su día de estreno.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE ARTÍCULO: AMD RYZEN -->
+        <div id="article-amd" class="content-section">
+            <button class="back-button" onclick="showSection('home')">← Volver al Inicio</button>
+            <div class="article-full fade-in">
+                <div class="article-full-header">
+                    <span class="tag" style="background-color: var(--neon-cyan); color: #000;">Hardware</span>
+                    <h1>Filtrados los precios y especificaciones de la nueva generación de procesadores AMD Ryzen</h1>
+                    <div class="article-full-meta"><span>Por Lisa S.</span><span>•</span><span>Hace 1 día</span><span>•</span><span>Lectura de 3 min</span></div>
+                </div>
+                <img class="article-full-image" src="https://placehold.co/1200x500/1e293b/bc13fe?text=AMD+Ryzen+Desktop+Processors" alt="AMD Ryzen Filtración">
+                <div class="article-body">
+                    <p>Nuevos documentos logísticos filtrados por distribuidores internacionales han revelado los supuestos precios oficiales y configuraciones de núcleos de la próxima línea de procesadores de alta gama de AMD para equipos de escritorio.</p>
+                    
+                    <p>La estrategia de la compañía parece orientarse a ofrecer un rendimiento térmico y de cálculo superior, compitiendo de tú a tú en el mercado de creadores de contenido y entusiastas del gaming competitivo.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Eficiencia energética y arquitectura optimizada</h2>
+                    <p>Gracias a los avances en sus nodos de fabricación de última generación, estos procesadores logran exprimir frecuencias de reloj elevadas sin disparar el consumo eléctrico ni las exigencias de refrigeración líquida extrema.</p>
+                    <p>Los jugadores que buscan exprimir al máximo tasas de fotogramas estables en títulos dependientes de la CPU encontrarán en esta familia una opción sumamente atractiva.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Disponibilidad en el mercado global</h2>
+                    <p>Se espera que los primeros análisis independientes salgan a la luz a lo largo de las próximas semanas, coincidiendo con su llegada oficial a las principales tiendas de componentes informáticos.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE ARTÍCULO: CYBERPUNK -->
+        <div id="article-cyberpunk" class="content-section">
+            <button class="back-button" onclick="showSection('home')">← Volver al Inicio</button>
+            <div class="article-full fade-in">
+                <div class="article-full-header">
+                    <span class="tag">Juegos</span>
+                    <h1>CD Projekt Red inicia la fase de desarrollo principal de la secuela de Cyberpunk</h1>
+                    <div class="article-full-meta"><span>Por V. Silverhand</span><span>•</span><span>Hace 1 día</span><span>•</span><span>Lectura de 4 min</span></div>
+                </div>
+                <img class="article-full-image" src="https://placehold.co/1200x500/1e293b/00f3ff?text=Project+Orion+Cyberpunk+Sequel" alt="Cyberpunk Sequel Project Orion">
+                <div class="article-body">
+                    <p>CD Projekt Red ha anunciado oficialmente que su ambicioso proyecto conocido provisionalmente como <strong>Project Orion</strong> (la esperada secuela de Cyberpunk 2077) ha entrado oficialmente en su fase de producción principal en su estudio norteamericano.</p>
+                    
+                    <p>Tras el éxito rotundo de la expansión Phantom Liberty y la actualización 2.0, el estudio busca consolidar el universo futurista resolviendo los errores estructurales del pasado y apostando por un desarrollo transparente.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>El salto definitivo a Unreal Engine 5</h2>
+                    <p>Uno de los cambios más significativos anunciados es la transición completa desde el motor propietario del estudio hacia la avanzada tecnología de Unreal Engine 5, lo que optimizará drásticamente los flujos de trabajo de los desarrolladores.</p>
+                    <p>Esto se traducirá en un mundo abierto dotado de un realismo visual deslumbrante y una estabilidad técnica sobresaliente desde el primer día de lanzamiento.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Nuevas historias en Night City</h2>
+                    <p>El equipo creativo promete expandir las tramas narrativas complejas y las decisiones morales profundas que convirtieron al título original en una obra de culto dentro del género cyberpunk.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA DE ARTÍCULO: STEAM DECK -->
+        <div id="article-steamdeck" class="content-section">
+            <button class="back-button" onclick="showSection('home')">← Volver al Inicio</button>
+            <div class="article-full fade-in">
+                <div class="article-full-header">
+                    <span class="tag" style="background-color: #ff003c;">Consolas</span>
+                    <h1>Valve patenta un nuevo sistema de refrigeración para futuras consolas portátiles</h1>
+                    <div class="article-full-meta"><span>Por G. Newell</span><span>•</span><span>Hace 2 días</span><span>•</span><span>Lectura de 3 min</span></div>
+                </div>
+                <img class="article-full-image" src="https://placehold.co/1200x500/1e293b/bc13fe?text=Valve+Steam+Deck+Patente+Termica" alt="Steam Deck Patente">
+                <div class="article-body">
+                    <p>Registros recientes de patentes presentados por Valve han dejado al descubierto soluciones de ingeniería innovadoras orientadas a optimizar la disipación térmica en dispositivos de formato compacto y consolas portátiles.</p>
+                    
+                    <p>La patente detalla un diseño revolucionario de cámaras de vapor adaptativas y ventiladores de ultra bajo perfil pensados para maximizar el rendimiento del procesador sin comprometer la comodidad ergonómica del usuario.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>Mayor autonomía y menor ruido acústico</h2>
+                    <p>Uno de los mayores retos en las consolas portátiles actuales es el equilibrio entre el calor generado y la duración de la batería. Las mejoras descritas apuntan a una gestión inteligente de la energía en sesiones de juego prolongadas.</p>
+                    <p>Aunque Valve no ha confirmado formalmente una sucesora directa de Steam Deck a corto plazo, estos movimientos demuestran que la compañía continúa investigando y perfeccionando su hardware.</p>
+
+                    <div class="ad-placeholder ad-infeed">[Bloque AdSense - Anuncio In-Article]</div>
+
+                    <h2>El compromiso con el ecosistema Linux y SteamOS</h2>
+                    <p>La comunidad de jugadores de PC celebra estas patentes, vislumbrando un futuro prometedor donde el juego portátil sin ataduras siga evolucionando de la mano de tecnologías punteras.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: POLÍTICA DE PRIVACIDAD -->
+        <div id="privacy" class="content-section">
+            <div class="legal-content">
+                <h1>Política de Privacidad</h1>
+                <p>Última actualización: Septiembre de 2026</p>
+                <p>En <strong>NexTech Gaming</strong> nos comprometemos a garantizar la seguridad y privacidad de todos nuestros visitantes. Este sitio web utiliza cookies de terceros procedentes de Google AdSense para mostrar anuncios personalizados en función de tus hábitos de navegación.</p>
+                <h2>Uso de Cookies y Publicidad</h2>
+                <p>Google utiliza cookies para publicar anuncios relevantes basados en las visitas anteriores de los usuarios a este sitio web o a otros sitios de Internet. Puedes inhabilitar el uso de publicidad personalizada accediendo a la configuración de anuncios de Google.</p>
+                <h2>Derechos del usuario</h2>
+                <p>El usuario tiene el derecho de acceder, rectificar y suprimir sus datos en cualquier momento poniéndose en contacto con nosotros a través del formulario habilitado en la sección de contacto.</p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN: CONTACTO -->
+        <div id="contact" class="content-section">
+            <div class="legal-content">
+                <h1>Contacto</h1>
+                <p>¿Tienes alguna consulta, sugerencia de temática o quieres ponerte en contacto con nuestro equipo de redacción técnica? Rellena el siguiente formulario.</p>
+                <form class="contact-form" onsubmit="event.preventDefault(); document.getElementById('form-success').style.display='block'; this.reset();">
+                    <label>Nombre</label>
+                    <input type="text" required placeholder="Tu nombre">
+                    <label>Correo Electrónico</label>
+                    <input type="email" required placeholder="tucorreo@ejemplo.com">
+                    <label>Mensaje</label>
+                    <textarea rows="4" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    <button type="submit" style="padding: 12px 25px; background: var(--neon-purple); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 5px;">Enviar Mensaje</button>
+                    <div id="form-success" style="display: none; color: var(--neon-cyan); margin-top: 15px; font-weight: bold;">¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="logo" style="font-size: 1.5rem; margin-bottom: 10px;" onclick="showSection('home')">Nex<span>Tech</span></div>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Tu portal de referencia sobre noticias de videojuegos y tecnología.</p>
+            <div class="footer-links">
+                <a href="#" onclick="showSection('home'); return false;">Inicio</a>
+                <a href="#" onclick="showSection('contact'); return false;">Contacto</a>
+                <a href="#" onclick="showSection('privacy'); return false;">Política de Privacidad</a>
+            </div>
+            <p style="color: #475569; font-size: 0.8rem; margin-top: 20px;">&copy; 2026 NexTech Gaming. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        });
+
+        function showSection(sectionId) {
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
